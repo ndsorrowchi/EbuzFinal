@@ -5,26 +5,18 @@
  */
 package EmployeePart;
 
-import BeanModel.EmplBean;
-import BeanModel.EmplLoginModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DataAccess.EmplDAO;
-import Utils.ConvertUtils;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author chiming
  */
-public class EmplLogin extends HttpServlet {
+public class EmplHome extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,28 +30,17 @@ public class EmplLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rderr = getServletContext().getRequestDispatcher("/emperror.jsp");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            try {
-                HttpSession session = request.getSession(false);
-                if(session==null)
-                {
-                    throw new NullPointerException("No session tracked. You can only access here via the official website.");
-                }
-                String id = request.getParameter("id");
-                String pwd = request.getParameter("password");
-                EmplLoginModel model=ConvertUtils.validateEmpl(id, pwd);
-                EmplBean bn;
-                bn = EmplDAO.Login(model);                
-                session.setAttribute("emplbean", bn);
-                response.sendRedirect("EmplHome");
-            } catch (Exception ex) {
-                Logger.getLogger(EmplLogin.class.getName()).log(Level.SEVERE, null, ex);
-                String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
-                request.setAttribute("errmsg", errorMessage);
-                rderr.forward(request, response);
-            }
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EmplHome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EmplHome at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -99,7 +80,7 @@ public class EmplLogin extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "It Handles Employee Login";
+        return "Short description";
     }// </editor-fold>
 
 }
