@@ -16,8 +16,8 @@ import java.sql.ResultSet;
  *
  * @author chiming
  */
-public class EmplDAO{
-    private EmplDAO(){}
+public class EmployeeService{
+    private EmployeeService(){}
     //==================
     
     public static final EmplBean Login(EmplLoginModel model) throws Exception{
@@ -35,7 +35,7 @@ public class EmplDAO{
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 String nickname = rs.getString(1);
-                return new EmplBean(model.getId(),model.getPassword(),nickname);
+                return new EmplBean(model.getId(),nickname);
             }else{
                 return null;
             }

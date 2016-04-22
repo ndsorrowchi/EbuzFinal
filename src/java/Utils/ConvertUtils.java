@@ -9,6 +9,7 @@ import java.security.MessageDigest;
 import org.json.JSONObject;
 import javax.xml.bind.DatatypeConverter;
 import BeanModel.*;
+
 /**
  *
  * @author chiming

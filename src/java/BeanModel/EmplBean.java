@@ -14,17 +14,14 @@ import java.io.Serializable;
 public class EmplBean extends Object implements Serializable{
     
     private int id;
-    private String password;
     private String nickname;
     
-    public EmplBean(){id=-1;password=null;nickname=null;}
-    public EmplBean(int eid, String pwd, String name){id=eid;password=pwd;nickname=name;}
+    public EmplBean(){id=-1;nickname=null;}
+    public EmplBean(int eid, String name){id=eid;nickname=name;}
     
     public int getId(){return id;}
-    public String getPassword(){return password;}
     public String getNickname(){return nickname;}
     
-    public void setId(int eid){id=eid;}
-    public void setPassword(String pwd){password=pwd;}  
+    public void setId(int eid){id=eid;} 
     public void setNickname(String name){nickname=name;}
 }
