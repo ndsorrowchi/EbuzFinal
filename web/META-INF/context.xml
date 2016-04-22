@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/EbuzFinal"/>
+<Context antiJARLocking="true" path="/EbuzFinal">
+
+<Resource name="ConnPool" auth="Container" type="javax.sql.DataSource"
+maxActive="1000" maxIdle="30" maxWait="10000"
+username="mic82" password="eb3"
+driverClassName="org.apache.derby.jdbc.ClientDriver"
+url="jdbc:derby://localhost:1527/TmpBookStore"/>
+
+</Context>
