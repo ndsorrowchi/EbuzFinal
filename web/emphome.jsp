@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page language="java" import="java.sql.*,BeanModel.EmplBean"%>
+<jsp:useBean id="emplbean" class="BeanModel.EmplBean" scope="session"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,17 +21,44 @@
             EmplBean eb=(EmplBean)session.getAttribute("emplbean");
             if(eb.getNickname()!=null&&eb.getId()!=-1)
             {
-                response.setHeader("Refresh", "1; URL=EmplHome");
+                ;
             }
-        }      
+            else
+            {
+                response.setHeader("Refresh", "1; URL=EmplLogin");
+            }
+        }
+        else
+        {
+            response.setHeader("Refresh", "1; URL=EmplLogin");
+        }
     %>  
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation" id="mynav" style="margin-bottom: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                    data-target="#navbar-collapse">
+                <span class="sr-only">switch</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#mynav">Hail2Books</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+                <li><a href="#user-profile-wrapper"><span class="glyphicon glyphicon-user" style="margin-right:5px;"></span><jsp:getProperty name="emplbean" property="nickname"/></a></li>
+                <li><a href="emphome"><span class="glyphicon glyphicon-home" style="margin-right:5px;"></span>Home</a></li>
+                <li><a href="EmplLogout"><span class="glyphicon glyphicon-off" style="margin-right:5px;"></span>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
     <div style="width:100%;">
         <div class="container">
             <div class="text-center">
                 <h1 style="color: #23527c"><big>Employee Login</big></h1>
-                <h4 style="color: #23527c"><big>Login to Employee Portal.</big></h4>
+                <h4 style="color: #23527c"><big></big></h4>
             </div>    
             <div class="row">
                 <div class="col-sm-4"></div>

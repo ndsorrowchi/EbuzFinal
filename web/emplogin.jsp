@@ -33,10 +33,10 @@
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                        <form role="form" action="Login" method="post">
+                        <form role="form" action="EmplLogin" method="post">
                             <div class="form-group">
                                 <label for="login-username">Employee ID:</label>
-                                <input id="login-username" type="email" name="username" maxlength="40" class="form-control" required />
+                                <input id="login-username" type="text" name="id" maxlength="40" class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label for="login-password">Password</label>

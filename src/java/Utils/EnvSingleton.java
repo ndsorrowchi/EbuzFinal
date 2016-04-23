@@ -16,7 +16,7 @@ public class EnvSingleton {
     	
     private static EnvSingleton instance = null;
     
-    private static boolean MD5Available = true;
+    private boolean MD5Available = true;
     
     private EnvSingleton()
     {
@@ -26,6 +26,7 @@ public class EnvSingleton {
         }catch(Exception e){
             MD5Available = false;
         }
+        this.MD5Available=false;
     }
 
     public static EnvSingleton getInstance()
@@ -38,6 +39,6 @@ public class EnvSingleton {
     } 
     
     public boolean isMD5Available(){
-        return this.isMD5Available();
+        return this.MD5Available;
     }
 }

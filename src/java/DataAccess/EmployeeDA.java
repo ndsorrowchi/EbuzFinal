@@ -16,15 +16,15 @@ import java.sql.ResultSet;
  *
  * @author chiming
  */
-public class EmployeeService{
-    private EmployeeService(){}
+public class EmployeeDA{
+    private EmployeeDA(){}
     //==================
     
     public static final EmplBean Login(EmplLoginModel model) throws Exception{
         if(model==null)
         {return null;}
         
-        String sql = "Select nickname,email from Employee where eid=? and password=?";
+        String sql = "Select nickname,email from Employee where eid=? and pwd=?";
         Connection con = DBUtils.getConnFromPool();
         
         try{

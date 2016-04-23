@@ -3,8 +3,8 @@
 
 <Resource name="ConnPool" auth="Container" type="javax.sql.DataSource"
 maxActive="1000" maxIdle="30" maxWait="10000"
-username="mic82" password="eb3"
+username="infsci2730" password="infsci2730"
 driverClassName="org.apache.derby.jdbc.ClientDriver"
-url="jdbc:derby://localhost:1527/TmpBookStore"/>
+url="jdbc:derby://localhost:1527/BookStore"/>
 
 </Context>

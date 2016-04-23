@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DataAccess.EmployeeService;
+import DataAccess.EmployeeDA;
 import Utils.ConvertUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,9 +50,10 @@ public class EmplLogin extends HttpServlet {
                 String id = request.getParameter("id");
                 String pwd = request.getParameter("password");
                 EmplLoginModel model=ConvertUtils.validateEmpl(id, pwd);
-                EmplBean bn = EmployeeService.Login(model);                
+                EmplBean bn = EmployeeDA.Login(model);                
                 session.setAttribute("emplbean", bn);
-                response.sendRedirect("EmplHome");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/EmplHome");
+                rd.forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EmplLogin.class.getName()).log(Level.SEVERE, null, ex);
                 String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
