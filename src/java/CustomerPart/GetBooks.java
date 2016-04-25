@@ -5,26 +5,18 @@
  */
 package CustomerPart;
 
-import BeanModel.UserBean;
-import BeanModel.UserLoginModel;
-import DataAccess.CustomerDA;
-import Utils.ConvertUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author chiming
  */
-public class UserLogin extends HttpServlet {
+public class GetBooks extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,31 +30,10 @@ public class UserLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/plain;charset=UTF-8");
-        //RequestDispatcher rderr = getServletContext().getRequestDispatcher("/error.jsp");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            try {
-                HttpSession session = request.getSession(false);
-                if(session==null)
-                {
-                    throw new NullPointerException("No session tracked. You can only access here via the official website.");
-                }
-                String id = request.getParameter("email");
-                String pwd = request.getParameter("password");
-                UserLoginModel model=ConvertUtils.validateUser(id, pwd);
-                UserBean bn = CustomerDA.Login(model);                
-                session.setAttribute("userbean", bn);
-                
-                out.println("{\"status\":\"success\",\"message\":\"You are successfully signed in.\"}");
-                //RequestDispatcher rd = getServletContext().getRequestDispatcher("/UserHome");
-                //rd.forward(request, response);
-            } catch (Exception ex) {
-                Logger.getLogger(UserRegister.class.getName()).log(Level.SEVERE, null, ex);
-                String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
-                //request.setAttribute("errmsg", errorMessage);
-                //rderr.forward(request, response);
-                out.println("{\"status\":\"fail\",\"message\":\"Sign in failed. Please make sure the input is correct. Otherwise please call service at (412)XXX-XXXX.\"}");
-            }   
+            String type=request.getParameter("type");
+            
         }
     }
 

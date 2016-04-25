@@ -16,7 +16,7 @@
         String errmsg=(String)request.getAttribute("errmsg");
         if(errmsg==null)
             errmsg="Unexpected Error";
-        String redirect="home";
+        String redirect="index.jsp";
         String target=(String)request.getAttribute("target");
         if(target!=null)
             redirect=target;

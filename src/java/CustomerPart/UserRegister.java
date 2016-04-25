@@ -53,7 +53,7 @@ public class UserRegister extends HttpServlet {
                 UserRegisterModel model=ConvertUtils.validateUserReg(id, pwd, nickname);
                 UserBean bn = CustomerDA.Register(model);                
                 session.setAttribute("userbean", bn);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/UserHome");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserRegister.class.getName()).log(Level.SEVERE, null, ex);

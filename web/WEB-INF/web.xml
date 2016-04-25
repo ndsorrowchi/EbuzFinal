@@ -28,6 +28,14 @@
         <servlet-name>CheckRegistered</servlet-name>
         <servlet-class>CustomerPart.CheckRegistered</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Chat</servlet-name>
+        <servlet-class>ChatService.Chat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetBooks</servlet-name>
+        <servlet-class>CustomerPart.GetBooks</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmplLogin</servlet-name>
         <url-pattern>/EmplLogin</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>CheckRegistered</servlet-name>
         <url-pattern>/CheckRegistered</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Chat</servlet-name>
+        <url-pattern>/Chat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetBooks</servlet-name>
+        <url-pattern>/GetBooks</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

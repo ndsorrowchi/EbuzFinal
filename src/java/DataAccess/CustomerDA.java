@@ -48,7 +48,7 @@ public class CustomerDA {
         if(model==null)
         {return null;}
         
-        String sql = "Select nickname from Users where email=? and pwd=?";
+        String sql = "Select nickname,uid from Users where email=? and pwd=?";
         Connection con = DBUtils.getConnFromPool();
         
         try{
@@ -60,7 +60,8 @@ public class CustomerDA {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 String nickname = rs.getString(1);
-                return new UserBean(model.getEmail(),nickname);
+                int id= rs.getInt(2);
+                return new UserBean(id,model.getEmail(),nickname);
             }else{
                 return null;
             }
@@ -87,7 +88,18 @@ public class CustomerDA {
             
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                return new UserBean(model.getEmail(),model.getNickname());
+                PreparedStatement ps2=con.prepareStatement("Select uid from Users where email=?");
+                ps.setString(1, model.getEmail());
+                ResultSet rs2=ps.executeQuery();
+                if(rs2.next())
+                {
+                    int id= rs2.getInt(1);
+                    return new UserBean(id, model.getEmail(),model.getNickname());
+                }
+                else
+                {
+                    return null;
+                }
             }else{
                 return null;
             }
