@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EmployeePart;
+package CustomerPart;
 
+import BeanModel.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,13 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import BeanModel.EmplBean;
 
 /**
  *
  * @author chiming
  */
-public class EmplLogout extends HttpServlet {
+public class UserLogout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,16 +37,16 @@ public class EmplLogout extends HttpServlet {
             HttpSession session=request.getSession(false);
             if(session!=null)
             {
-                EmplBean eb=(EmplBean)session.getAttribute("emplbean");
+                UserBean ub=(UserBean)session.getAttribute("userbean");
                 
-                session.removeAttribute("emplbean");
+                session.removeAttribute("userbean");
                      
-                response.sendRedirect("emplogin.jsp");  
+                response.sendRedirect("userlogin.jsp");  
             }
             else
             {
-                response.sendRedirect("emplogin.jsp");
-            }            
+                response.sendRedirect("userlogin.jsp");
+            }  
         }
     }
 
@@ -86,7 +86,7 @@ public class EmplLogout extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Handles Employee Logout";
+        return "Handles Customer Logout";
     }// </editor-fold>
 
 }

@@ -55,7 +55,7 @@ function checkit()
 
     reqjson["useremail"]=elem.value;
 
-    xhr.open("POST","Check",true);
+    xhr.open("POST","CheckRegistered",true);
     xhr.send(JSON.stringify(reqjson));
     
 
@@ -71,7 +71,7 @@ function processData()
             {
                 if(count==1)
                 {
-                    notice.textContent="This email has been registered.";
+                    notice.textContent="Sorry. This email has been registered.";
                     notice.className="glyphicon glyphicon-remove text-danger";
                     validemail=false;
                     togglebutton();

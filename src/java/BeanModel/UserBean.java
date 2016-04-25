@@ -5,25 +5,23 @@
  */
 package BeanModel;
 
+import java.io.Serializable;
 
 /**
  *
  * @author chiming
  */
-public class UserRegisterModel{
+public class UserBean extends Object implements Serializable{
     
     private String email;
-    private String password;
     private String nickname;
     
-    public UserRegisterModel(){email=null;password=null;nickname=null;}
-    public UserRegisterModel(String emailaddr, String pwd, String name){email=emailaddr;password=pwd; nickname=name;}
+    public UserBean(){email=null;nickname=null;}
+    public UserBean(String eid, String name){email=eid;nickname=name;}
     
     public String getEmail(){return email;}
-    public String getPassword(){return password;}
     public String getNickname(){return nickname;}
     
-    public void setEmail(String emailaddr){email=emailaddr;}
-    public void setPassword(String pwd){password=pwd;}
+    public void setEmail(String eid){email=eid;} 
     public void setNickname(String name){nickname=name;}
 }

@@ -1,0 +1,2 @@
+insert into employee values(1,’robot@robot.com’,’44778C5F63DF1A5E7BACA334D508525F’, ‘service representative’);
+/*This employee is for super user and special request. the password in fact is 123404321*/

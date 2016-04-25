@@ -9,6 +9,7 @@ import java.security.MessageDigest;
 import org.json.JSONObject;
 import javax.xml.bind.DatatypeConverter;
 import BeanModel.*;
+import org.json.JSONException;
 
 /**
  *
@@ -18,12 +19,19 @@ public class ConvertUtils {
     private ConvertUtils(){}
     //--------------------------
     
-    public static final String getExceptionJson (Exception e)throws Exception{
-        String errmsg=e.getCause()==null?e.getMessage():e.getCause().getMessage();
-        JSONObject jo = new JSONObject();
-        jo.put("error", e.getClass().getSimpleName());
-        jo.put("details", errmsg);
-        return jo.toString();
+    public static final String getExceptionJson (Exception e){
+        try{
+            String errmsg=e.getCause()==null?e.getMessage():e.getCause().getMessage();
+            JSONObject jo = new JSONObject();
+            jo.put("error", e.getClass().getSimpleName());
+            jo.put("details", errmsg);
+            return jo.toString();
+        }catch (JSONException je)//always be able to do it, this function never throws exception
+        {
+            String errmsg=e.getCause()==null?e.getMessage():e.getCause().getMessage();
+            String jsonstr=String.format("{\"error\":\"%s\",\"details\":\"%s\"}", e.getClass().getSimpleName(),errmsg);
+            return jsonstr;
+        }
     }
     
     public static final String getMD5(String str) throws Exception{
@@ -34,6 +42,8 @@ public class ConvertUtils {
     
     public static final EmplLoginModel validateEmpl(String eid, String pwd){
         if(eid == null || pwd == null)
+            return null;
+        if(eid.equals("") || pwd.equals(""))
             return null;
         try{
             int id=Integer.parseInt(eid);
@@ -48,4 +58,46 @@ public class ConvertUtils {
         }
         
     }
+    
+    public static final UserLoginModel validateUser(String eid, String pwd){
+        if(eid == null || pwd == null)
+            return null;
+        if(eid.equals("") || pwd.equals(""))
+            return null;
+        try{
+            // if the system can do md5, then the db should have stored md5 inside.
+            // otherwise, it should have everything plain
+            boolean md5able = EnvSingleton.getInstance().isMD5Available();
+            String password=md5able?ConvertUtils.getMD5(pwd):pwd;
+            return new UserLoginModel(eid, password);
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+    }
+    
+    public static final UserRegisterModel validateUserReg(String eid, String pwd, String nickname){
+        if(eid == null || pwd == null||nickname== null)
+            return null;
+        if(eid.equals("") || pwd.equals("") || nickname.equals(""))
+            return null;
+        try{
+            // if the system can do md5, then the db should have stored md5 inside.
+            // otherwise, it should have everything plain
+            boolean md5able = EnvSingleton.getInstance().isMD5Available();
+            String password=md5able?ConvertUtils.getMD5(pwd):pwd;
+            return new UserRegisterModel(eid, password,nickname);
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+    }
+    
+    public static final String getJsonFromSerializable (Object obj)throws Exception{
+        JSONObject jo = new JSONObject(obj);
+        return jo.toString();
+    }    
+    
 }

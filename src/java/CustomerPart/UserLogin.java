@@ -3,22 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EmployeePart;
+package CustomerPart;
 
+import BeanModel.UserBean;
+import BeanModel.UserLoginModel;
+import DataAccess.CustomerDA;
+import Utils.ConvertUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import BeanModel.EmplBean;
 
 /**
  *
  * @author chiming
  */
-public class EmplLogout extends HttpServlet {
+public class UserLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +38,28 @@ public class EmplLogout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher rderr = getServletContext().getRequestDispatcher("/error.jsp");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session=request.getSession(false);
-            if(session!=null)
-            {
-                EmplBean eb=(EmplBean)session.getAttribute("emplbean");
-                
-                session.removeAttribute("emplbean");
-                     
-                response.sendRedirect("emplogin.jsp");  
-            }
-            else
-            {
-                response.sendRedirect("emplogin.jsp");
-            }            
+            try {
+                HttpSession session = request.getSession(false);
+                if(session==null)
+                {
+                    throw new NullPointerException("No session tracked. You can only access here via the official website.");
+                }
+                String id = request.getParameter("email");
+                String pwd = request.getParameter("password");
+                UserLoginModel model=ConvertUtils.validateUser(id, pwd);
+                UserBean bn = CustomerDA.Login(model);                
+                session.setAttribute("userbean", bn);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/UserHome");
+                rd.forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(UserRegister.class.getName()).log(Level.SEVERE, null, ex);
+                String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                request.setAttribute("errmsg", errorMessage);
+                rderr.forward(request, response);
+            }   
         }
     }
 
@@ -86,7 +99,7 @@ public class EmplLogout extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Handles Employee Logout";
+        return "Short description";
     }// </editor-fold>
 
 }

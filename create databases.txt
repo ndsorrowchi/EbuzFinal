@@ -1,0 +1,55 @@
+create table users
+(uid integer generated always as identity (start with 1, increment by 1),
+ email varchar(45) unique,
+ pwd varchar(45),
+ nickname varchar(45),
+ primary key(uid)
+);
+
+create table book
+(bid integer generated always as identity (start with 1, increment by 1),
+ bookname varchar(45),
+ quantity integer check (quantity >= 0),
+ price numeric(5,2) check (price > 0),
+ category varchar(30),
+ primary key(bid)
+);
+
+create table orders
+(orderid integer generated always as identity (start with 1, increment by 1),
+ uid integer,
+ bid integer,
+ timeulong bigint NOT NULL,
+ quantity integer check (quantity >= 0),
+ primary key(orderid),
+ foreign key(uid) references users(uid) on delete set null,
+ foreign key(bid) references book(bid) on delete set null
+);
+
+create table employee
+(eid integer generated always as identity (start with 100000, increment by 1),
+ email varchar(45),
+ pwd varchar(45),
+ nickname varchar(45),
+ primary key(eid)
+);
+
+create table chat
+(chatid integer generated always as identity (start with 1, increment by 1),
+ uid integer,
+ eid integer,
+ direction boolean,
+ content varchar(500),
+ timeulong bigint NOT NULL,
+ primary key(chatid),
+ foreign key(uid) references users(uid) on delete cascade,
+ foreign key(eid) references employee(eid) on delete cascade
+);
+
+create table FAQ 
+(
+ qid integer generated always as identity (start with 1, increment by 1),
+ title varchar(500),
+ content varchar(2000),
+ primary key(qid)
+);

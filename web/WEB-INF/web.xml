@@ -12,6 +12,22 @@
         <servlet-name>EmplLogout</servlet-name>
         <servlet-class>EmployeePart.EmplLogout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserLogin</servlet-name>
+        <servlet-class>CustomerPart.UserLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserLogout</servlet-name>
+        <servlet-class>CustomerPart.UserLogout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserRegister</servlet-name>
+        <servlet-class>CustomerPart.UserRegister</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckRegistered</servlet-name>
+        <servlet-class>CustomerPart.CheckRegistered</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmplLogin</servlet-name>
         <url-pattern>/EmplLogin</url-pattern>
@@ -23,6 +39,22 @@
     <servlet-mapping>
         <servlet-name>EmplLogout</servlet-name>
         <url-pattern>/EmplLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserLogin</servlet-name>
+        <url-pattern>/UserLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserLogout</servlet-name>
+        <url-pattern>/UserLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserRegister</servlet-name>
+        <url-pattern>/UserRegister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckRegistered</servlet-name>
+        <url-pattern>/CheckRegistered</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

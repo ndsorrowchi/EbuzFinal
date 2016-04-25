@@ -32,6 +32,7 @@ public class EmployeeDA{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, model.getId());
             ps.setString(2, model.getPassword());
+            
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 String nickname = rs.getString(1);

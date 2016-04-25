@@ -5,13 +5,22 @@
  */
 package BeanModel;
 
-import java.io.Serializable;
 
 /**
  *
  * @author chiming
  */
-public class UserLoginModel extends Object implements Serializable{
+public class UserLoginModel{
     
-    public UserLoginModel(){}
+    private String email;
+    private String password;
+    
+    public UserLoginModel(){email=null;password=null;}
+    public UserLoginModel(String emailaddr, String pwd){email=emailaddr;password=pwd;}
+    
+    public String getEmail(){return email;}
+    public String getPassword(){return password;}
+    
+    public void setEmail(String emailaddr){email=emailaddr;}
+    public void setPassword(String pwd){password=pwd;}
 }

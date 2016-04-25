@@ -3,22 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EmployeePart;
+package CustomerPart;
 
+import DataAccess.CustomerDA;
+import Utils.ConvertUtils;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import BeanModel.EmplBean;
+import org.json.JSONObject;
 
 /**
  *
  * @author chiming
  */
-public class EmplLogout extends HttpServlet {
+public class CheckRegistered extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,19 +39,27 @@ public class EmplLogout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session=request.getSession(false);
-            if(session!=null)
-            {
-                EmplBean eb=(EmplBean)session.getAttribute("emplbean");
-                
-                session.removeAttribute("emplbean");
-                     
-                response.sendRedirect("emplogin.jsp");  
+            StringBuilder sb=new StringBuilder();
+            BufferedReader br=request.getReader();
+            String str;
+            while( (str = br.readLine()) != null ){
+                sb.append(str);
+            }    
+            JSONObject obj = new JSONObject(sb.toString());
+            try{
+                int count=CustomerDA.CheckExist(ConvertUtils.validateUser(obj.getString("useremail"), ""));
+                JSONObject ret=new JSONObject();
+                ret.put("count", count);
+                out.println(ret.toString());
+            } catch (SQLException sqle) {
+                String responseText=ConvertUtils.getExceptionJson(sqle);
+                Logger.getLogger(CheckRegistered.class.getName()).log(Level.SEVERE, null, sqle);
+                out.println(responseText);
+            } catch (Exception ex) {
+                String responseText=ConvertUtils.getExceptionJson(ex);
+                out.println(responseText);                
+                Logger.getLogger(CheckRegistered.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else
-            {
-                response.sendRedirect("emplogin.jsp");
-            }            
         }
     }
 
@@ -86,7 +99,7 @@ public class EmplLogout extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Handles Employee Logout";
+        return "Short description";
     }// </editor-fold>
 
 }
