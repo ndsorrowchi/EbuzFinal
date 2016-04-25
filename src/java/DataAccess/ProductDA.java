@@ -35,7 +35,7 @@ public class ProductDA {
                         "where O.uid=V.uid and O.bid!=? and B.bid=O.bid\n" +
                         "group by (O.bid)\n" +
                         "order by Relativity desc\n" +
-                        "fetch first 1 rows only) as R\n" +
+                        "fetch first 10 rows only) as R\n" +
                         "where R.bid=book.bid";
         Connection con = DBUtils.getConnFromPool();
         
