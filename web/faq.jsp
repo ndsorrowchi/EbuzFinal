@@ -52,7 +52,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Your Shopping Cart</title>
+        <title>Frequently Asked Questions</title>
         <link rel="stylesheet" href="include/bootstrap/css/bootstrap.min.css">
         <script src="include/bootstrap/js/jquery-2.1.3.min.js"></script>
         <script src="include/bootstrap/js/bootstrap.min.js"></script>
