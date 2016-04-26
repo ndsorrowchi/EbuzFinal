@@ -14,6 +14,11 @@ Same browser will maintain two beans in session: Employee’s bean and User’s 
 	test user: ‘123@4.com’,  all test users use ‘1234’ as passwords
 	test employee: ‘100000’, all test employees use ‘12345’ as passwords
 
+4. for data, please go to dbms folder. Database is there.
 
+5. If the attached derby database does not work, 
+use the script in “create databases.txt” and “initdata.txt”
+
+Thanks.
 
 

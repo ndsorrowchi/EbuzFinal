@@ -43,10 +43,10 @@ function updateData()
                     var row='<tr class="data">';
                     var raw="bookIMG/"+real.list[i].name+".jpg";
                     var res = raw.replace(/:/g, "-");
-                    
+                    var a='<a href="itemdetail.jsp?bid='+real.list[i].bid+'">'+real.list[i].name+'</a>';
                     var img='<td><img class="img-responsive img-mybox-sm" alt="book image" src="'+res.replace(/\s/g,"%20")+'"></img></td>';
                     row=row+img;
-                    row=row+'<td>'+real.list[i].name+'</td>';
+                    row=row+'<td>'+a+'</td>';
                     row=row+'<td>'+real.list[i].quantity+'</td>';
                     row=row+'<td>'+real.list[i].price+'</td>';
                     row=row+'<td><button class="btn btn-warning btn-xs" onclick="onAdd(this)" data-bid="'+real.list[i].bid+'">Add to Cart</button></td>\n</tr>';

@@ -73,7 +73,7 @@
     %>
             <div class="col-sm-4">
                 <img class="img-responsive img-mybox" alt="Book Image"  src=<%=encoded%> ></img>
-                <button class="btn btn-warning" style="margin-top: 30px;" onclick="onAdd(this)" data-bid=<%=String.valueOf(bm.getBid())%>>Add to Cart</button>
+                
             </div>
             <div class="col-sm-8">
                 <h2><%=bm.getName()%></h2>
@@ -85,6 +85,7 @@
                     <br>
                     Price:<p class="lead text-danger"><%="$"+bm.getPrice()%></p>
                 </div>
+                <button class="btn btn-warning" style="margin-top: 30px;" onclick="onAdd(this)" data-bid=<%=String.valueOf(bm.getBid())%>>Add to Cart</button>
             </div>
     <%
     }

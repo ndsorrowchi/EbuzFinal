@@ -105,13 +105,14 @@ if(sc==null || sc.getList().isEmpty())
         BigDecimal bi=new java.math.BigDecimal(price).setScale(2,RoundingMode.HALF_EVEN);
         double total=bi.doubleValue()*number*1.07;
         BigDecimal bi2=new java.math.BigDecimal(total).setScale(2,RoundingMode.HALF_EVEN);
-        
+        String href=String.format("itemdetail.jsp?bid=%d", ci.getBook().getBid());
+        String a=String.format("<a href='%s'>%s</a>", href, bname);
         out.println("<tr data-bid=\""+ci.getBook().getBid()+"\">");
         String imgsrc=String.format("bookIMG/%s.jpg",ci.getBook().getName());
         String raw2=imgsrc.replaceAll(":", "-");
         String encoded=raw2.replaceAll("\\s", "%20");
         out.println(String.format("<td><img class=\"img-responsive img-mybox-sm\" src=\"%s\" alt=\"Book\"></img></td>", encoded));
-        out.println(String.format("<td>%s</td>", bname));
+        out.println(String.format("<td>%s</td>", a));
         out.println(String.format("<td>%d</td>", q));
         out.println(String.format("<td>%s</td>", price));
         out.println(String.format("<td>%s</td>", bi2.toPlainString()));

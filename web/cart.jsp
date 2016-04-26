@@ -93,13 +93,14 @@ if(sc.getItems().isEmpty())
         String price=ci.getProduct().getPrice();
         double total=ci.getTotal();
         BigDecimal bi=new java.math.BigDecimal(total).setScale(2,RoundingMode.HALF_EVEN);
-        
+        String href=String.format("itemdetail.jsp?bid=%d", ci.getProduct().getBid());
+        String a=String.format("<a href='%s'>%s</a>", href, bname);
         out.println("<tr data-bid=\""+ci.getProduct().getBid()+"\">");
         String imgsrc=String.format("bookIMG/%s.jpg",ci.getProduct().getName());
         String raw2=imgsrc.replaceAll(":", "-");
         String encoded=raw2.replaceAll("\\s", "%20");
         out.println(String.format("<td><img class=\"img-responsive img-mybox-sm\" src=\"%s\" alt=\"Book\"></img></td>", encoded));
-        out.println(String.format("<td>%s</td>", bname));
+        out.println(String.format("<td>%s</td>", a));
         out.println(String.format("<td>%d</td>", q));
         out.println(String.format("<td>%s</td>", price));
         out.println(String.format("<td>%s</td>", bi.toPlainString()));
