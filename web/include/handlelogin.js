@@ -29,6 +29,7 @@ function dologin()
            var dialog=document.getElementById("myModal").children[0];
            var greeting=document.getElementById("user-greeting");
            greeting.innerHTML="Hi, "+nickname;
+           greeting.setAttribute("data-uid",""+userid);
            var content="<div class=\"modal-content\">\n" +
                 "<div class=\"modal-header\" style=\"padding:35px 50px;\">\n" +
                 "    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
@@ -52,6 +53,10 @@ function dologin()
         console.log(xhr.status);
         console.log(thrownError);
         console.log(xhr.responseText);
+        
+        var err=JSON.parse(xhr.responseText);
+        
+        alert(err.message);
       }
     });    
 }

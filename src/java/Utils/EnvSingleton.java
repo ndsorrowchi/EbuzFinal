@@ -26,7 +26,7 @@ public class EnvSingleton {
         }catch(Exception e){
             MD5Available = false;
         }
-        this.MD5Available=false;
+        //this.MD5Available=false;
     }
 
     public static EnvSingleton getInstance()

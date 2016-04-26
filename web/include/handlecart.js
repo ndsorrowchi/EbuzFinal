@@ -118,8 +118,8 @@ function removeItem(btn){
 
 function onCheckout()
 {
-    var span=document.getElementById("user-greeting").textContent;
-    if(span!="Your Account")
+    var span=document.getElementById("user-greeting");
+    if(span.getAttribute("data-uid")!="-1")
     {
         window.location.href = "confirmation.jsp";
     }

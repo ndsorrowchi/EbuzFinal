@@ -1,6 +1,9 @@
     <div style="height:60px;"></div>
-    <footer class="container-fluid text-center navbar-fixed-bottom">
-        <p>Online Store Copyright</p>
+    <footer class="container-fluid navbar-fixed-bottom">
+    <div class="row">
+        <div class="col-sm-6"><span>Online Store Copyright</span></div>
+        <div class="col-sm-6"><a class="pull-right" href="emplogin.jsp">Employee Login</a></div>
+    </div>    
     </footer>
 
     <!-- Modal , this is displayed by situation-->

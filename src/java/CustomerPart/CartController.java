@@ -139,10 +139,14 @@ public class CartController extends HttpServlet {
                 }
             }
             if(!good)
-            {out.println(failJson);}
+            {
+                response.setStatus(400);
+                out.println(failJson);
+            }
         } catch (Exception ex) {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
             try (PrintWriter out = response.getWriter()) {
+                response.setStatus(400);
                 out.println(ConvertUtils.getExceptionJson(ex));
             }
         }

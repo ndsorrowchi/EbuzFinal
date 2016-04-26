@@ -34,6 +34,13 @@ public class ConvertUtils {
         }
     }
     
+        // User Customized Json
+    public static String getErrorJSON(String title, String message)
+    {
+        String res="{\"error\":\""+title+"\",\"details\":\""+message+"\"}";
+        return res;
+    } 
+    
     public static final String getMD5(String str) throws Exception{
         String hash = DatatypeConverter.printHexBinary(
                 MessageDigest.getInstance("MD5").digest(str.getBytes("UTF-8")));
@@ -92,8 +99,16 @@ public class ConvertUtils {
         catch(Exception e){
             return null;
         }
-        
     }
+    
+    public static final MessageModel validateMsg(int uid, int eid, int direction, String msg, long time){
+        if(eid<0 || uid <0)
+            return null;
+        if(direction<-1 || direction>1)
+            return null;
+        return new MessageModel(uid, eid, direction, msg, time);
+    }    
+
     
     public static final String getJsonFromSerializable (Object obj)throws Exception{
         JSONObject jo = new JSONObject(obj);

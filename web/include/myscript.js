@@ -65,6 +65,7 @@ function processData()
         if (xhr.status == 200) {
             //alert(xhr.responseText);
             var JSONresp = JSON.parse(xhr.responseText);
+            console.log(JSONresp);
             var count=JSONresp["count"];
             var notice=document.createElement("SPAN");
             if(true)

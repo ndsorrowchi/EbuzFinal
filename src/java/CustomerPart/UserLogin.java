@@ -67,7 +67,7 @@ public class UserLogin extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(UserRegister.class.getName()).log(Level.SEVERE, null, ex);
                 //String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
-                
+                response.setStatus(400);
                 //request.setAttribute("errmsg", errorMessage);
                 //rderr.forward(request, response);
                 out.println("{\"status\":\"fail\",\"message\":\"Sign in failed. Please make sure the input is correct. Otherwise please call service at (412)XXX-XXXX.\"}");

@@ -42,21 +42,18 @@ public class EmplLogin extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             try {
-                HttpSession session = request.getSession(false);
-                if(session==null)
-                {
-                    throw new NullPointerException("No session tracked. You can only access here via the official website.");
-                }
+                HttpSession session = request.getSession(true);
                 String id = request.getParameter("id");
                 String pwd = request.getParameter("password");
                 EmplLoginModel model=ConvertUtils.validateEmpl(id, pwd);
-                EmplBean bn = EmployeeDA.Login(model);                
+                EmplBean bn = EmployeeDA.Login(model);
                 session.setAttribute("emplbean", bn);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/EmplHome");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EmplLogin.class.getName()).log(Level.SEVERE, null, ex);
-                String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                String cause=ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                String errorMessage=ex.getClass().getSimpleName()+ cause==null?"Unknown Error":ex.getCause().getMessage();
                 request.setAttribute("errmsg", errorMessage);
                 rderr.forward(request, response);
             }

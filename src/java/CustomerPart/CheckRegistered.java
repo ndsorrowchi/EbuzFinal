@@ -47,16 +47,18 @@ public class CheckRegistered extends HttpServlet {
             }    
             JSONObject obj = new JSONObject(sb.toString());
             try{
-                int count=CustomerDA.CheckExist(ConvertUtils.validateUser(obj.getString("useremail"), ""));
+                int count=CustomerDA.CheckExist(ConvertUtils.validateUser(obj.getString("useremail"), "ee"));
                 JSONObject ret=new JSONObject();
                 ret.put("count", count);
                 out.println(ret.toString());
             } catch (SQLException sqle) {
                 String responseText=ConvertUtils.getExceptionJson(sqle);
                 Logger.getLogger(CheckRegistered.class.getName()).log(Level.SEVERE, null, sqle);
+                response.setStatus(400);
                 out.println(responseText);
             } catch (Exception ex) {
                 String responseText=ConvertUtils.getExceptionJson(ex);
+                response.setStatus(400);
                 out.println(responseText);                
                 Logger.getLogger(CheckRegistered.class.getName()).log(Level.SEVERE, null, ex);
             }

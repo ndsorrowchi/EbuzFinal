@@ -14,9 +14,10 @@
                     <li><a href="category.jsp">Search</a></li>
                     <li><a href="userorders.jsp">Order History</a></li>
                     <li><a href="faq.jsp">FAQ</a></li>
+                    <li><a href="userchat.jsp">Live Service</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a id="login-navbtn" data-toggle="modal" href="#myModal"><span class="glyphicon glyphicon-user"></span><span id="user-greeting"><%=navbarGreeting%></span></a></li>
+                    <li><a id="login-navbtn" data-toggle="modal" href="#myModal"><span class="glyphicon glyphicon-user"></span><span id="user-greeting" data-uid=<%=String.valueOf(uid)%>><%=navbarGreeting%></span></a></li>
                     <li><a href="cart.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                 </ul>
             </div>

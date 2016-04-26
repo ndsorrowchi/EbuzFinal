@@ -1,0 +1,19 @@
+Environment:
+Tomcat 8;
+Netbeans 8.0.2;
+
+Debug Notice:
+
+1. All required libraries are already included.
+
+2. To test Customer and Service desk chat, please use two different browsers,
+or two instances of browsers. Not recommended to test within same browser.
+Same browser will maintain two beans in session: Employee’s bean and User’s Bean.
+
+3. for quick reference: 
+	test user: ‘123@4.com’,  all test users use ‘1234’ as passwords
+	test employee: ‘100000’, all test employees use ‘12345’ as passwords
+
+
+
+

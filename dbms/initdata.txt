@@ -1,5 +1,3 @@
-insert into employee values(1,’robot@robot.com’,’44778C5F63DF1A5E7BACA334D508525F’, ‘service representative’);
-/*This employee is for super user and special request. the password in fact is 123404321*/
 
 insert into book(bookname, quantity, price, category) values('The women''s health',50,16.99,'health');
 insert into book(bookname, quantity, price, category) values('Smarter Faster Better',33,16.80,'health');
@@ -56,17 +54,18 @@ insert into faq (title, content) values ('How do I select items to purchase?', '
 insert into faq (title, content) values ('How do I know what is in my shopping cart?', 'When browsing through this Online Store, simply look to the header of the screen to see which items you have in your shopping cart.  Use the arrows to move between items in your cart.');
 insert into faq (title, content) values ('How do I modify the quantity of a product in my shopping cart?', 'Click on "view shopping cart" to see an itemized list of the products in your shopping cart. Change the quantity of the item and click "modify cart" to update the contents of your shopping cart.');
 
-INSERT INTO users(email, pwd, nickname) VALUES ('12we@gmail.com','1234','Aspen');
-INSERT INTO users(email, pwd, nickname) VALUES ('qw13@gmail.com','1234','Emi');
-INSERT INTO users(email, pwd, nickname) VALUES ('ab22@gmail.com','1234','Simon');
-INSERT INTO users(email, pwd, nickname) VALUES ('zx11@gmail.com','1234','Apple');
-INSERT INTO users(email, pwd, nickname) VALUES ('ll90@gmail.com','1234','Nate');
-INSERT INTO users(email, pwd, nickname) VALUES ('ui34@gmail.com','1234','Mary');
-INSERT INTO users(email, pwd, nickname) VALUES ('nm33@gmail.com','1234','Ward');
-INSERT INTO users(email, pwd, nickname) VALUES ('hg12@gmail.com','1234','Neil');
-INSERT INTO users(email, pwd, nickname) VALUES ('vv10@gmail.com','1234','Aspen');
-INSERT INTO users(email, pwd, nickname) VALUES ('we67@gmail.com','1234','Emerson');
+INSERT INTO users(email, pwd, nickname) VALUES ('123@4.com','81DC9BDB52D04DC20036DBD8313ED055’,’noob’);
+INSERT INTO users(email, pwd, nickname) VALUES ('12we@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Aspen');
+INSERT INTO users(email, pwd, nickname) VALUES ('qw13@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Emi');
+INSERT INTO users(email, pwd, nickname) VALUES ('ab22@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Simon');
+INSERT INTO users(email, pwd, nickname) VALUES ('zx11@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Apple');
+INSERT INTO users(email, pwd, nickname) VALUES ('ll90@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Nate');
+INSERT INTO users(email, pwd, nickname) VALUES ('ui34@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Mary');
+INSERT INTO users(email, pwd, nickname) VALUES ('nm33@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Ward');
+INSERT INTO users(email, pwd, nickname) VALUES ('hg12@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Neil');
+INSERT INTO users(email, pwd, nickname) VALUES ('vv10@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Aspen');
+INSERT INTO users(email, pwd, nickname) VALUES ('we67@gmail.com','81DC9BDB52D04DC20036DBD8313ED055','Emerson');
 
-INSERT INTO employee(email, pwd, nickname) VALUES ('qwe123@gmail.com','12345','Evan');
-INSERT INTO employee(email, pwd, nickname) VALUES ('rt57@gmail.com','12345','Taylor');
-INSERT INTO employee(email, pwd, nickname) VALUES ('as55@gmail.com','12345','Coby');
+INSERT INTO employee(email, pwd, nickname) VALUES ('qwe123@gmail.com','827CCB0EEA8A706C4C34A16891F84E7B','Evan');
+INSERT INTO employee(email, pwd, nickname) VALUES ('rt57@gmail.com','827CCB0EEA8A706C4C34A16891F84E7B','Taylor');
+INSERT INTO employee(email, pwd, nickname) VALUES ('as55@gmail.com','827CCB0EEA8A706C4C34A16891F84E7B','Coby');

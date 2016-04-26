@@ -88,11 +88,11 @@ public class CustomerDA {
             ps.setString(2, model.getPassword());
             ps.setString(3, model.getNickname());
             
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            ps.executeUpdate();
+            if(true){
                 PreparedStatement ps2=con.prepareStatement("Select uid from Users where email=?");
-                ps.setString(1, model.getEmail());
-                ResultSet rs2=ps.executeQuery();
+                ps2.setString(1, model.getEmail());
+                ResultSet rs2=ps2.executeQuery();
                 if(rs2.next())
                 {
                     int id= rs2.getInt(1);

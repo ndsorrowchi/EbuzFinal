@@ -46,5 +46,6 @@ and open the template in the editor.
             <div class="col-sm-4"></div>
         </div>
         <script src="include/myscript.js"></script>
+        <script src="include/json2.js"></script>
     </body>
 </html>

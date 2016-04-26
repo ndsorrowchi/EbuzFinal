@@ -97,6 +97,7 @@ public class GetBooks extends HttpServlet {
                 }
                 if(!good)
                 {
+                    response.setStatus(400);
                     out.println(this.failJson);
                 }                
             }catch(Exception ex){

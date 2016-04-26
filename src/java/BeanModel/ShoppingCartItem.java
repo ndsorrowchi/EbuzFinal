@@ -17,13 +17,27 @@ public class ShoppingCartItem {
     private BookModel product;
     private int quantity;
 
+    public ShoppingCartItem() {
+        product = null;
+        quantity = 1;
+    }
+    
     public ShoppingCartItem(BookModel model) {
         product = model;
         quantity = 1;
     }
+    
+        public ShoppingCartItem(BookModel model, int qty) {
+        product = model;
+        quantity = qty;
+    }
 
     public BookModel getProduct() {
         return product;
+    }
+    
+    public void setProduct(BookModel book) {
+         product=book;
     }
 
     public int getQuantity() {

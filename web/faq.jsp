@@ -17,6 +17,7 @@
 
 <%
     boolean hasuser=false;
+    int uid=-1;
     String nickname="New Customer";
     String email="none";
     String navbarGreeting="Your Account";
@@ -30,6 +31,7 @@
             navbarGreeting="Hi, "+ub.getNickname();
             nickname=ub.getNickname();
             email=ub.getEmail();
+            uid=ub.getUid();
         }
         else
         {
@@ -54,6 +56,7 @@
         <link rel="stylesheet" href="include/bootstrap/css/bootstrap.min.css">
         <script src="include/bootstrap/js/jquery-2.1.3.min.js"></script>
         <script src="include/bootstrap/js/bootstrap.min.js"></script>
+        <script src="include/json2.js"></script>
         <script src="include/handlelogin.js"></script>
          <%@include file="include/includestyle.txt" %>
     </head>

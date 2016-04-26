@@ -45,32 +45,161 @@ public class ServiceDA {
         finally{con.close();} 
     }
     
-    public static final BookListModel getTopSelling() throws Exception{
-        
+    public static final String post(MessageModel mm) throws Exception{
+        if(mm==null)
+            return null;
+        if(mm.getMessage()==null || mm.getMessage().replaceAll("\\s+", "").equals(""))// should not be a blank
+            return null;        
         //select most purchased item purchased by the users who has bought the current item
         String sql = "";
         Connection con = DBUtils.getConnFromPool();
         
         try{
             
-            PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps=con.prepareStatement("select count(*) from(\n" +
+            "select uid from users where users.uid=?\n" +
+            "union all\n" +
+            "select eid from employee where employee.eid=?) Temp");
+        ps.setInt(1, mm.getUid());
+        ps.setInt(2, mm.getEid());
+        ResultSet rs=ps.executeQuery();
+        if(rs.next()&&rs.getInt(1)==2)//make sure two users exist in db.
+        {
+            sql="insert into chat (uid, eid, direction, content, timeulong) values(?,?,?,?,?)";
 
-            ResultSet rs = ps.executeQuery();
-            ArrayList<BookModel> arr = new ArrayList<BookModel> ();
-            while(rs.next()){
-                int bid=rs.getInt(1);
-                String bname=rs.getString(2);
-                int quantity=rs.getInt(3);
-                java.math.BigDecimal bi=rs.getBigDecimal(4);
-                String category = rs.getString(5);
-                
-                arr.add(new BookModel(bid,bname,quantity,bi.toPlainString(),category));
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, mm.getUid());
+            ps.setInt(2, mm.getEid());
+            ps.setInt(3, mm.getDirection());
+            ps.setString(4, mm.getMessage());
+            ps.setLong(5, mm.getTime());
+
+            ps.executeUpdate();
+
+            return "{\"success\":\"post successfully submitted\"}";
+        }
+        else
+        {return null;}
+        
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        finally{con.close();} 
+    }
+    
+    public static final MessageListModel update(MessageModel mm) throws Exception{
+        if(mm==null)
+            return null;        
+        //select most purchased item purchased by the users who has bought the current item
+        String sql = "";
+        Connection con = DBUtils.getConnFromPool();
+        
+        try{
+            sql="select uid, eid, direction, content, timeulong from chat where (uid=? and eid=?) and (timeulong>?) order by timeulong asc";
+            PreparedStatement ps=con.prepareStatement("select count(*) from(\n" +
+            "select uid from users where users.uid=?\n" +
+            "union all\n" +
+            "select eid from employee where employee.eid=?) Temp");
+            ps.setInt(1, mm.getUid());
+            ps.setInt(2, mm.getEid());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()&&rs.getInt(1)==2)//make sure two users exist in db.
+            {
+                ps=con.prepareStatement(sql);
+                ps.setInt(1, mm.getUid());
+                ps.setInt(2, mm.getEid());
+                ps.setLong(3, mm.getTime());
+                rs=ps.executeQuery();
+
+                ArrayList<MessageModel> list=new ArrayList<>();
+
+                while(rs.next())
+                {
+                    MessageModel temp=new MessageModel(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getLong(5));
+                    list.add(temp);
+                }
+                return new MessageListModel(list);
             }
-            return new BookListModel("top-selling",arr);
+            else
+                return null;
         }catch(Exception e)
         {
             throw e;
         }
         finally{con.close();} 
-    }       
+    }
+        
+    public static final String terminate(MessageModel mm) throws Exception{
+        if(mm==null)
+            return null;        
+        //select most purchased item purchased by the users who has bought the current item
+        String sql = "";
+        Connection con = DBUtils.getConnFromPool();
+        
+        try{
+            sql="delete from chat where uid=? and eid=?";
+            PreparedStatement ps=con.prepareStatement("select count(*) from(\n" +
+                "select uid from users where users.uid=?\n" +
+                "union all\n" +
+                "select eid from employee where employee.eid=?) Temp");
+            ps.setInt(1, mm.getUid());
+            ps.setInt(2, mm.getEid());
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()&&rs.getInt(1)==2)//make sure two users exist in db.
+            {
+                ps=con.prepareStatement(sql);
+                ps.setInt(1, mm.getUid());
+                ps.setInt(2, mm.getEid());
+
+                ps.executeUpdate();
+                return "{\"success\":\"chat successfully terminated\"}";
+            }
+            else
+                return null;
+        }catch(Exception e)
+        {
+            throw e;
+        }
+        finally{con.close();} 
+    }
+
+            
+    public static final UserListModel getPendingList(int eid) throws Exception{
+        if(eid<0)
+            return null;        
+        //select most purchased item purchased by the users who has bought the current item
+        String sql = "";
+        Connection con = DBUtils.getConnFromPool();
+        
+        try{
+            sql="select users.uid,users.email, users.nickname from users, chat where eid=? and chat.uid=users.uid order by (chat.timeulong) asc fetch first 1 rows only";
+            PreparedStatement ps=con.prepareStatement("select count(eid) from employee where employee.eid=?");
+            ps.setInt(1, eid);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()&&rs.getInt(1)==1)//make sure two users exist in db.
+            {
+                ps=con.prepareStatement(sql);
+                ps.setInt(1, eid);
+
+               ResultSet rs2 = ps.executeQuery();
+                
+               ArrayList<UserBean> list=new ArrayList<>();
+
+                while(rs2.next())
+                {
+                    UserBean temp=new UserBean(rs2.getInt(1),rs2.getString(2),rs2.getString(3));
+                    list.add(temp);
+                }
+                return new UserListModel(list);
+            }
+            else
+                return null;
+        }catch(Exception e)
+        {
+            throw e;
+        }
+        finally{con.close();} 
+    }
 }

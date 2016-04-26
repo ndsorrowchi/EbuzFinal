@@ -51,7 +51,7 @@ public class UserRegister extends HttpServlet {
                 String pwd = request.getParameter("password");
                 String nickname = request.getParameter("nickname");
                 UserRegisterModel model=ConvertUtils.validateUserReg(id, pwd, nickname);
-                UserBean bn = CustomerDA.Register(model);                
+                UserBean bn = CustomerDA.Register(model);
                 session.setAttribute("userbean", bn);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
