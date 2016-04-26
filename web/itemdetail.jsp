@@ -103,7 +103,7 @@
                 for(int i=0;i<bl.getList().size()&&i<4;i++){ 
                     BookModel book=bl.getList().get(i);
                     String src=String.format("bookIMG/%s.jpg",book.getName());
-                    String href=String.format("itemdetail.jsp?bid=%d", bm.getBid());
+                    String href=String.format("itemdetail.jsp?bid=%d", book.getBid());
             %>
             <div class="col-sm-3">
                 <div class="panel panel-info">
