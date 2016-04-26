@@ -20,6 +20,42 @@ import java.sql.ResultSet;
 public class ProductDA {
     private ProductDA(){}
     //==================
+    public static final BookModel getById(int bid) throws Exception{
+        if(bid==-1)
+        {
+            return null;
+        }
+        
+        //select most purchased item purchased by the users who has bought the current item
+        String sql = "select book.bid,book.bookname,book.QUANTITY,book.PRICE,book.CATEGORY from book\n" +
+                        "where book.bid=?";
+        Connection con = DBUtils.getConnFromPool();
+        
+        try{
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, bid);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                int id=rs.getInt(1);
+                String bname=rs.getString(2);
+                int quantity=rs.getInt(3);
+                java.math.BigDecimal bi=rs.getBigDecimal(4);
+                String category = rs.getString(5);
+                
+               return new BookModel(id,bname,quantity,bi.toPlainString(),category);
+            }
+            else
+            {
+            return null;
+            }
+        }catch(Exception e)
+        {
+            throw e;
+        }
+        finally{con.close();} 
+    }
     
     public static final BookListModel getRecommendation(int bid) throws Exception{
         if(bid==-1)
@@ -125,8 +161,10 @@ public class ProductDA {
         {
             for(int i=0;i<splitted.length;i++)
             {
+                if(splitted[i]==null || splitted[i].length()==0)
+                    continue;
                 String temp = "select bid from BOOK\n" +
-                                "where bookname like '%"+splitted[i]+"%'";
+                                "where lower(bookname) like '%"+splitted[i].toLowerCase()+"%'";
                 if(i!=splitted.length-1)
                 {
                     temp+="\n Union All \n ";
@@ -193,8 +231,10 @@ public class ProductDA {
         {
             for(int i=0;i<splitted.length;i++)
             {
+                if(splitted[i]==null || splitted[i].length()==0)
+                    continue;
                 String temp = "select bid from BOOK\n" +
-                                "where bookname like '%"+splitted[i]+"%'";
+                                "where lower(bookname) like '%"+splitted[i].toLowerCase()+"%'";
                 if(i!=splitted.length-1)
                 {
                     temp+="\n Union All \n ";
@@ -382,7 +422,7 @@ public class ProductDA {
             return new BookListModel("complex-search",arr);
         }
         String categoryClause="";
-        if(category!=null && !category.replaceAll("\\s+", "").equals(""))
+        if(category!=null && !category.replaceAll("\\s+", "").equals("") && !category.replaceAll("\\s+", "").toLowerCase().equals("all"))
         {
             categoryClause = String.format("category='%s'",category);
         }
@@ -404,8 +444,10 @@ public class ProductDA {
         {
             for(int i=0;i<splitted.length;i++)
             {
+                if(splitted[i]==null || splitted[i].length()==0)
+                    continue;
                 String temp = "select bid from BOOK\n" +
-                                "where "+categoryClause+" AND bookname like '%"+splitted[i]+"%'";
+                                "where "+categoryClause+" AND lower(bookname) like '%"+splitted[i].toLowerCase()+"%'";
                 if(i!=splitted.length-1)
                 {
                     temp+="\n Union All \n ";
@@ -455,7 +497,7 @@ public class ProductDA {
         }
         
         String categoryClause="";
-        if(category!=null && !category.replaceAll("\\s+", "").equals(""))
+        if(category!=null && !category.replaceAll("\\s+", "").equals("") && !category.replaceAll("\\s+", "").toLowerCase().equals("all"))
         {
             categoryClause = String.format("category='%s'",category);
         }
@@ -477,8 +519,10 @@ public class ProductDA {
         {
             for(int i=0;i<splitted.length;i++)
             {
+                if(splitted[i]==null || splitted[i].length()==0)
+                    continue;
                 String temp = "select bid from BOOK\n" +
-                                "where "+categoryClause+" AND bookname like '%"+splitted[i]+"%'";
+                                "where "+categoryClause+" AND lower(bookname) like '%"+splitted[i].toLowerCase()+"%'";
                 if(i!=splitted.length-1)
                 {
                     temp+="\n Union All \n ";

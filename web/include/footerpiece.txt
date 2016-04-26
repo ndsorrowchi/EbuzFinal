@@ -1,0 +1,53 @@
+    <div style="height:60px;"></div>
+    <footer class="container-fluid text-center navbar-fixed-bottom">
+        <p>Online Store Copyright</p>
+    </footer>
+
+    <!-- Modal , this is displayed by situation-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        <% if(!hasuser) { %>
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                </div>
+                <div class="modal-body" style="padding:20px 50px;">
+                    <form role="form" action="javascript:void(0);" onSubmit="return false;" method="POST">
+                      <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Email</label>
+                        <input type="email" class="form-control" id="username" placeholder="Enter email" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                      </div>
+                        <button onclick="dologin()" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                    </form>
+                    <br>
+                    <p>Not a registered member? <a href="userregister.jsp">Sign Up</a></p>
+                </div>
+                <div id ="modal-footer" class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> <%=navbarGreeting%> </h4>
+                </div>
+                <div class="modal-body" style="padding:20px 50px;">
+                    <div>
+                        <p class="text-warning lead">You are signed in.</p>
+                        <a href="UserLogout" class="btn btn-danger" ><span class="glyphicon glyphicon-off"></span> Sign Out</a>
+                    </div>
+                </div>
+                <div id ="modal-footer" class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                </div>
+            </div>                    
+            <% } %>
+        </div>
+    </div>

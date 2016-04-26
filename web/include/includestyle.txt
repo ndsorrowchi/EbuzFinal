@@ -1,0 +1,36 @@
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+        .navbar {
+            margin-bottom: 0px;
+            border-radius: 0;
+        }
+        /* Remove the jumbotron's default bottom margin */ 
+        .jumbotron {
+            margin-bottom: 10px;
+        }
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 15px;
+            height: 50px;
+        }
+
+        .modal-header, h4, .close {
+            background-color: #5cb85c;
+            color:white !important;
+            text-align: center;
+            font-size: 30px;
+        }
+        .modal-footer {
+            background-color: #f9f9f9;
+        }
+
+        .img-mybox {
+            max-width: 200px;
+            max-height: 360px;
+        }
+        .img-mybox-sm {
+            max-width: 60px;
+            max-height: 110px;
+        }
+    </style>

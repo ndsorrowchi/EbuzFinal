@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class ShoppingCart  extends Object implements Serializable {
 
-    List<ShoppingCartItem> items;
-    int numberOfItems;
-    double total;
+    private List<ShoppingCartItem> items;
+    private int numberOfItems;
+    private double total;
 
     public ShoppingCart() {
         items = new ArrayList<ShoppingCartItem>();
@@ -24,6 +24,27 @@ public class ShoppingCart  extends Object implements Serializable {
         total = 0;
     }
 
+    public ShoppingCart(ArrayList<ShoppingCartItem> arr, int count, int sum) {
+        items = arr;
+        numberOfItems = count;
+        total = sum;
+    }
+    
+    public ShoppingCartItem findById(int id){
+        if(id<1)
+            return null;
+        ShoppingCartItem item = null;
+
+        for (ShoppingCartItem scItem : items) {
+
+            if (scItem.getProduct().getBid() == id) {
+                item = scItem;
+                break;
+            }
+        }
+
+        return item;
+    }
     
     public synchronized void addItem(BookModel product) {
 
@@ -31,7 +52,7 @@ public class ShoppingCart  extends Object implements Serializable {
 
         for (ShoppingCartItem scItem : items) {
 
-            if (scItem.getProduct().getId() == product.getId()) {
+            if (scItem.getProduct().getBid() == product.getBid()) {
 
                 newItem = false;
                 scItem.incrementQuantity();
@@ -44,6 +65,21 @@ public class ShoppingCart  extends Object implements Serializable {
         }
     }
 
+    public synchronized void remove(BookModel product) {
+        ShoppingCartItem item = null;
+
+        for (ShoppingCartItem scItem : items) {
+
+            if (scItem.getProduct().getBid() == product.getBid()) {
+                    item = scItem;
+                    break;
+            }
+        }
+        if (item != null) {
+            // remove from cart
+            items.remove(item);
+        }        
+    }
     
     public synchronized void update(BookModel product, String quantity) {
 
@@ -58,7 +94,7 @@ public class ShoppingCart  extends Object implements Serializable {
 
             for (ShoppingCartItem scItem : items) {
 
-                if (scItem.getProduct().getId() == product.getId()) {
+                if (scItem.getProduct().getBid() == product.getBid()) {
 
                     if (qty != 0) {
                         // set item quantity to new value
@@ -100,37 +136,42 @@ public class ShoppingCart  extends Object implements Serializable {
         double amount = 0;
 
         for (ShoppingCartItem scItem : items) {
-
-            BookModel product = (BookModel) scItem.getProduct();
-            amount += (scItem.getQuantity() * product.getPrice().doubleValue());
+            amount += (scItem.getTotal());
         }
 
         return amount;
     }
 
     
-    public synchronized void calculateTotal(String surcharge) {
+    public synchronized void calculateTotal() {
 
         double amount = 0;
 
-        // cast surcharge as double
-        double s = Double.parseDouble(surcharge);
+        // tax 7%
+        double tax_rate = 0.07;
 
         amount = this.getSubtotal();
-        amount += s;
 
-        total = amount;
+        total = amount*(1.0+tax_rate);
     }
 
     public synchronized double getTotal() {
-
-        return total;
+        //this.calculateTotal();
+        // tax 7%
+        double tax_rate = 0.07;
+        return this.getSubtotal()*tax_rate;
     }
 
+    public synchronized double getTaxes() {
+        this.calculateTotal();
+        return total;
+    }
+    
     public synchronized void clear() {
         items.clear();
         numberOfItems = 0;
         total = 0;
     }
+    
     
 }

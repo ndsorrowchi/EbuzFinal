@@ -50,15 +50,24 @@ public class UserLogin extends HttpServlet {
                 String id = request.getParameter("email");
                 String pwd = request.getParameter("password");
                 UserLoginModel model=ConvertUtils.validateUser(id, pwd);
-                UserBean bn = CustomerDA.Login(model);                
-                session.setAttribute("userbean", bn);
+                UserBean bn = CustomerDA.Login(model);
+                if(bn!=null)
+                {
+                    session.setAttribute("userbean", bn);
+                }
+                else{
+                    throw new NullPointerException("Invalid Input. Please check and try later.");
+                }
+                    
                 
-                out.println("{\"status\":\"success\",\"message\":\"You are successfully signed in.\"}");
+                out.println("{\"status\":\"success\",\"message\":\"You are successfully signed in.\",\"nickname\":\""+bn.getNickname()+"\",\"userid\":"+bn.getUid()+"}");
+                //Logger.getLogger(UserRegister.class.getName()).log(Level.INFO, "{\"status\":\"success\",\"message\":\"You are successfully signed in.\",\"nickname\":\""+bn.getNickname()+"\",\"userid\":"+bn.getUid()+"}");
                 //RequestDispatcher rd = getServletContext().getRequestDispatcher("/UserHome");
                 //rd.forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserRegister.class.getName()).log(Level.SEVERE, null, ex);
-                String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                //String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                
                 //request.setAttribute("errmsg", errorMessage);
                 //rderr.forward(request, response);
                 out.println("{\"status\":\"fail\",\"message\":\"Sign in failed. Please make sure the input is correct. Otherwise please call service at (412)XXX-XXXX.\"}");

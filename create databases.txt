@@ -38,7 +38,7 @@ create table chat
 (chatid integer generated always as identity (start with 1, increment by 1),
  uid integer,
  eid integer,
- direction boolean,
+ direction integer check(direction>=-1 and direction<=1),
  content varchar(500),
  timeulong bigint NOT NULL,
  primary key(chatid),

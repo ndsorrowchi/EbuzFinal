@@ -41,11 +41,11 @@ public class UserLogout extends HttpServlet {
                 
                 session.removeAttribute("userbean");
                      
-                response.sendRedirect("userlogin.jsp");  
+                response.sendRedirect("index.jsp");  
             }
             else
             {
-                response.sendRedirect("userlogin.jsp");
+                response.sendRedirect("index.jsp");
             }  
         }
     }

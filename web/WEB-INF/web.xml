@@ -36,6 +36,10 @@
         <servlet-name>GetBooks</servlet-name>
         <servlet-class>CustomerPart.GetBooks</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Checkout</servlet-name>
+        <servlet-class>CustomerPart.Checkout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmplLogin</servlet-name>
         <url-pattern>/EmplLogin</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>GetBooks</servlet-name>
         <url-pattern>/GetBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkout</servlet-name>
+        <url-pattern>/Checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

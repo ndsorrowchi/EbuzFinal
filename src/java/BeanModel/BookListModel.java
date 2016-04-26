@@ -22,7 +22,7 @@ public class BookListModel  extends Object implements Serializable{
     public String getType(){return type;}
     public ArrayList<BookModel> getList(){return list;}
     
-    public void setName(String str){type=str;}
+    public void setType(String str){type=str;}
     public void setList(ArrayList<BookModel> li){list=li;}
     
     

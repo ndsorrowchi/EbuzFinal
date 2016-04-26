@@ -19,39 +19,25 @@ public class ServiceDA {
     private ServiceDA(){}
     //==================
     
-    public static final BookListModel getRecommendation(int bid) throws Exception{
-        if(bid==-1)
-        {return null;}
-        
+    public static final FaqListModel getFaq() throws Exception{
+        String str="";
         //select most purchased item purchased by the users who has bought the current item
-        String sql = "select book.bid,book.bookname,book.QUANTITY,book.PRICE,book.CATEGORY from book,\n" +
-                        "(select O.bid, count(O.bid) as Relativity\n" +
-                        "from Orders O, Book B, (select distinct uid from Orders where bid=?) V\n" +
-                        "where O.uid=V.uid and O.bid!=? and B.bid=O.bid\n" +
-                        "group by (O.bid)\n" +
-                        "order by Relativity desc\n" +
-                        "fetch first 1 rows only) as R\n" +
-                        "where R.bid=book.bid";
+        String sql = "select title,content from faq";
         Connection con = DBUtils.getConnFromPool();
         
         try{
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, bid);
-            ps.setInt(2, bid);
             
             ResultSet rs = ps.executeQuery();
-            ArrayList<BookModel> arr = new ArrayList<BookModel> ();
+            ArrayList<FaqModel> arr = new ArrayList<FaqModel> ();
             while(rs.next()){
-                int id=rs.getInt(1);
-                String bname=rs.getString(2);
-                int quantity=rs.getInt(3);
-                java.math.BigDecimal bi=rs.getBigDecimal(4);
-                String category = rs.getString(5);
+                String title=rs.getString(1);
+                String content=rs.getString(2);
                 
-                arr.add(new BookModel(id,bname,quantity,bi.toPlainString(),category));
+                arr.add(new FaqModel(title,content));
             }
-            return new BookListModel("based-on-book",arr);
+            return new FaqListModel("faq-list",arr);
         }catch(Exception e)
         {
             throw e;

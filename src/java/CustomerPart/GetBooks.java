@@ -5,12 +5,15 @@
  */
 package CustomerPart;
 
+import BeanModel.BookListModel;
+import DataAccess.ProductDA;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
@@ -18,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class GetBooks extends HttpServlet {
 
+    //private String successJson="{\"status\":\"success\"}";
+    private String failJson="{\"status\":\"fail\"}";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,8 +37,72 @@ public class GetBooks extends HttpServlet {
         response.setContentType("text/plain;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String type=request.getParameter("type");
-            
+            String type=request.getParameter("category");
+            String keywords=request.getParameter("keywords");
+            boolean good=false;
+            try{
+                if(type!=null&&keywords!=null)
+                {
+                    if(type.equals("all"))
+                    {
+                        BookListModel bl=ProductDA.getSearchResult(keywords);
+                        JSONObject jo=new JSONObject(bl);
+                        String str=jo.toString();
+                        good=true;
+                        out.println(str);
+                    }
+                    else
+                    {
+                        BookListModel bl=ProductDA.getComboSearchResult(keywords,type);
+                        JSONObject jo=new JSONObject(bl);
+                        String str=jo.toString();
+                        good=true;
+                        out.println(str);                        
+                    }
+                }
+                else if(type==null&&keywords!=null)
+                {
+                    BookListModel bl=ProductDA.getSearchResult(keywords);
+                    JSONObject jo=new JSONObject(bl);
+                    String str=jo.toString();
+                    good=true;
+                    out.println(str);                    
+                }
+                else if(type!=null&&keywords==null)
+                {
+                    if(type.equals("all"))
+                    {
+                        BookListModel bl=ProductDA.getAll();
+                        JSONObject jo=new JSONObject(bl);
+                        String str=jo.toString();
+                        good=true;
+                        out.println(str);
+                    }
+                    else
+                    {
+                        BookListModel bl=ProductDA.getFromCategory(type);
+                        JSONObject jo=new JSONObject(bl);
+                        String str=jo.toString();
+                        good=true;
+                        out.println(str);                        
+                    }                    
+                }
+                else
+                {
+                    BookListModel bl=ProductDA.getAll();
+                    JSONObject jo=new JSONObject(bl);
+                    String str=jo.toString();
+                    good=true;
+                    out.println(str);
+                }
+                if(!good)
+                {
+                    out.println(this.failJson);
+                }                
+            }catch(Exception ex){
+                out.println(this.failJson);
+            }
+
         }
     }
 
