@@ -46,7 +46,7 @@ public class ShoppingCart  extends Object implements Serializable {
         return item;
     }
     
-    public synchronized void addItem(BookModel product) {
+    public void addItem(BookModel product) {
 
         boolean newItem = true;
 
@@ -65,7 +65,7 @@ public class ShoppingCart  extends Object implements Serializable {
         }
     }
 
-    public synchronized void remove(BookModel product) {
+    public void remove(BookModel product) {
         ShoppingCartItem item = null;
 
         for (ShoppingCartItem scItem : items) {
@@ -81,7 +81,7 @@ public class ShoppingCart  extends Object implements Serializable {
         }        
     }
     
-    public synchronized void update(BookModel product, String quantity) {
+    public void update(BookModel product, String quantity) {
 
         short qty = -1;
 
@@ -114,12 +114,16 @@ public class ShoppingCart  extends Object implements Serializable {
         }
     }
 
-    public synchronized List<ShoppingCartItem> getItems() {
+    public List<ShoppingCartItem> getItems() {
 
         return items;
     }
+    
+    public void setItems(List<ShoppingCartItem> li) {
+         items=li;
+    }
 
-    public synchronized int getNumberOfItems() {
+    public int getNumberOfItems() {
 
         numberOfItems = 0;
 
@@ -130,8 +134,12 @@ public class ShoppingCart  extends Object implements Serializable {
 
         return numberOfItems;
     }
+    
+    public void setNumberofItems(int li) {
+         this.numberOfItems=li;
+    }
 
-    public synchronized double getSubtotal() {
+    public double getSubtotal() {
 
         double amount = 0;
 
@@ -143,7 +151,7 @@ public class ShoppingCart  extends Object implements Serializable {
     }
 
     
-    public synchronized void calculateTotal() {
+    public void calculateTotal() {
 
         double amount = 0;
 
@@ -155,19 +163,23 @@ public class ShoppingCart  extends Object implements Serializable {
         total = amount*(1.0+tax_rate);
     }
 
-    public synchronized double getTotal() {
+    public double getTaxes() {
         //this.calculateTotal();
         // tax 7%
         double tax_rate = 0.07;
         return this.getSubtotal()*tax_rate;
     }
 
-    public synchronized double getTaxes() {
+    public double getTotal() {
         this.calculateTotal();
         return total;
     }
     
-    public synchronized void clear() {
+    public void setTotal(double tot) {
+        total=tot;
+    }
+    
+    public void clear() {
         items.clear();
         numberOfItems = 0;
         total = 0;

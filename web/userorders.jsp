@@ -67,6 +67,7 @@
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
+                    <h3>Order History</h3>
                     <table class="table table-hover" style="margin-bottom: 50px;">
                         <thead>
                             <tr>
@@ -105,7 +106,7 @@ if(sc==null || sc.getList().isEmpty())
         out.println("<tr data-bid=\""+ci.getBook().getBid()+"\">");
         String imgsrc=String.format("bookIMG/%s.jpg",ci.getBook().getName());
         String raw2=imgsrc.replaceAll(":", "-");
-        String encoded=URLEncoder.encode(raw2, "UTF-8");
+        String encoded=raw2.replaceAll("\\s", "%20");
         out.println(String.format("<td><img class=\"img-responsive img-mybox-sm\" src=\"%s\" alt=\"Book\"></img></td>", encoded));
         out.println(String.format("<td>%s</td>", bname));
         out.println(String.format("<td>%d</td>", q));

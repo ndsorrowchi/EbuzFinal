@@ -18,7 +18,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
     </head>
     <body onload="initfield()">
-        
+        <h2>Dear Customer, Welcome to Hail2Books.com</h2>
         <div class="row" style="margin-top: 50px;">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">

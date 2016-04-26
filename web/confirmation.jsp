@@ -37,10 +37,6 @@
     {
         //response.setHeader("Refresh", "1; URL=EmplLogin");
     }
-    if(!hasuser)
-    {
-        
-    }
     
     if(null==session.getAttribute("cart"))
     {
@@ -68,6 +64,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
                     <table class="table table-hover" style="margin-bottom: 50px;">
+                        <h3>Confirm order</h3>
                         <thead>
                             <tr>
                                 <th>Book Image</th>

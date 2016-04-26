@@ -63,6 +63,7 @@
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
+                    <h3>View Cart</h3>
                     <table class="table table-hover" style="margin-bottom: 50px;">
                         <thead>
                             <tr>
@@ -102,8 +103,8 @@ if(sc.getItems().isEmpty())
         out.println("<td>");
         %>
             <div class="btn-group btn-group-xs">
-                <button class="btn btn-default" onclick="decrement(this)">-</button>
-                <button class="btn btn-default" onclick="increment(this)">+</button>
+                <button class="btn btn-default" onclick="decrement(this)"><span class="glyphicon glyphicon-minus"></span></button>
+                <button class="btn btn-default" onclick="increment(this)"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <button style="margin-left: 15px;" class="btn btn-danger btn-xs" onclick="removeItem(this)">Remove</button>
         <%

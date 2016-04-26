@@ -63,13 +63,15 @@ public class Checkout extends HttpServlet {
                     if(res!=-1)
                     {
                         sc.clear();
-                        response.sendRedirect("userorders.jsp");
+                        //response.sendRedirect("userorders.jsp");
                     }
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-                    rd.forward(request, response);
+                    response.sendRedirect("userorders.jsp");
+//                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+//                    rd.forward(request, response);
                 } catch (Exception ex) {
                     Logger.getLogger(UserRegister.class.getName()).log(Level.SEVERE, null, ex);
-                    String errorMessage=ex.getClass().getSimpleName()+ ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                    String errdetail=ex.getCause()==null?ex.getMessage():ex.getCause().getMessage();
+                    String errorMessage=ex.getClass().getSimpleName()+ errdetail==null?"Checkout Failed":errdetail;
                     request.setAttribute("errmsg", errorMessage);
                     rderr.forward(request, response);
                 }  

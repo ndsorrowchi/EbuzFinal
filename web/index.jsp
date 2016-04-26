@@ -70,9 +70,9 @@
                     String href=String.format("itemdetail.jsp?bid=%d", bm.getBid());
             %>
             <div class="col-sm-3">
-                <div class="panel panel-primary">
+                <div class="panel panel-warning">
                     <div class="panel-heading"><a href=<%=href%>><%=bm.getName()%></a></div>
-                    <div class="panel-body"><img class="img-responsive img-mybox" alt="Book Image"  src=<%=src.replaceAll("\\s", "%20")%>></img></div>
+                    <div class="panel-body"><img class="img-responsive img-mybox center-block" alt="Book Image"  src=<%=src.replaceAll("\\s", "%20")%>></img></div>
                 </div>
             </div>
             <%

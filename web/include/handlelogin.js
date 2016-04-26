@@ -71,7 +71,8 @@ function onAdd(btn){
         var real=JSON.parse(response);
         if(real.status=="success")
         {
-            alert("Add to your cart");            
+            //alert("Add to your cart");
+            btn.innerHTML='<span class="glyphicon glyphicon-ok"></span> Added to cart';
         }
       },
       error: function (xhr, ajaxOptions, thrownError) {

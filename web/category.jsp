@@ -33,12 +33,7 @@
     else
     {
         //response.setHeader("Refresh", "1; URL=EmplLogin");
-    }
-    
-   
-    
-    
-    
+    }    
 %> 
 <!DOCTYPE html>
 <html>
@@ -123,9 +118,6 @@
                     
                 </div>
             </div>
-    <%
-    
-    %>
         </div>
     </div>
     <br><br>
